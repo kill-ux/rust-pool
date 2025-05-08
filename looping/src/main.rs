@@ -9,7 +9,7 @@ fn main() {
         number += 1;
         io::stdin().read_line(&mut input).unwrap();
         if input == "The letter e\n" {
-            println!("{}", number);
+            println!("Number of trials: {}", number);
             break;
         }
         println!("{}", riddle);
