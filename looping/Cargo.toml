@@ -1,5 +1,5 @@
 [package]
-name = "speed_looping"
+name = "looping"
 version = "0.1.0"
 edition = "2024"
 
