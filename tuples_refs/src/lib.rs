@@ -12,7 +12,7 @@ pub fn first_name(student: &Student) -> &str {
 
 pub fn last_name(student: &Student) -> &str {
     &student.2
-}
+}   
 
 #[cfg(test)]
 mod tests {
