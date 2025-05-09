@@ -1,6 +1,6 @@
 pub fn nbr_function(c: i32) -> (i32, f64, f64) {
     let c1: f64 = c.into();
-    (c, c1.exp(), c1.abs().log((1f64).exp()))
+    (c, c1.exp(), c1.abs().ln())
 }
 
 pub fn str_function(a: String) -> (String, String) {
