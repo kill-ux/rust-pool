@@ -15,5 +15,5 @@ fn main() {
     assert_eq!(a_2, "help");
     assert_eq!(a_3, "particular");
     assert_eq!(a_4, "");
-    println!("");
+    println!("{}",a_1);
 }
