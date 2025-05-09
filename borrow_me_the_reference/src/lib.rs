@@ -25,7 +25,11 @@ pub fn delete_and_backspace(s: &mut String) {
             c2 += 1;
         } else if c2 != 0 {
             vec_count.push(c2 * 2);
-            vec[c2i] = vec[c2i] - c2;
+            if vec[c2i] >= c2 {
+                vec[c2i] = vec[c2i] - c2;
+            } else {
+                vec[c2i] = 0;
+            }
             c2 = 0;
         }
     }
