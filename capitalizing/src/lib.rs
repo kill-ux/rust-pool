@@ -4,7 +4,7 @@ pub fn capitalize_first(input: &str) -> String {
 
 pub fn title_case(input: &str) -> String {
     let mut new_str = String::with_capacity(input.chars().count());
-    for word in input.split(" ") {
+    for word in input.split_whitespace() {
         let w = capitalize_first(word);
         new_str.push_str(&(w + " "));
     }
