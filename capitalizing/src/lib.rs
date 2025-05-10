@@ -1,5 +1,9 @@
 pub fn capitalize_first(input: &str) -> String {
-    input[0..1].to_uppercase() + &input[1..]
+    if input.len() > 0 {
+        input[0..1].to_uppercase() + &input[1..]
+    } else {
+        "".into()
+    }
 }
 
 pub fn title_case(input: &str) -> String {
@@ -8,16 +12,14 @@ pub fn title_case(input: &str) -> String {
     for (index, c) in input.chars().enumerate() {
         if cap == true {
             new_str.push_str(&input[index..index + 1].to_uppercase());
-            cap = false ;
-            // continue;
+            cap = false;
+        } else {
+            if c.is_whitespace() {
+                cap = true;
+            }
+            new_str.push(c);
         }
-        if c.is_whitespace() {
-            cap = true;
-        }
-        // let w = capitalize_first(word);
-        new_str.push(c);
     }
-    new_str.pop();
     new_str
 }
 
