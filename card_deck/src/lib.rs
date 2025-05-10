@@ -1,5 +1,4 @@
-use rand::prelude::*;
-
+use rand::Rng;
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum Suit {
     Heart,
@@ -19,8 +18,8 @@ pub enum Rank {
 
 impl Suit {
     pub fn random() -> Suit {
-        let mut rng = rand::rng();
-        [Suit::Club, Suit::Diamond, Suit::Heart, Suit::Spade][rng.random_range(0..4)]
+        let mut rng = rand::thread_rng();
+        [Suit::Club, Suit::Diamond, Suit::Heart, Suit::Spade][rng.gen_range(0..4)]
     }
 
     pub fn translate(value: u8) -> Suit {
@@ -30,15 +29,15 @@ impl Suit {
 
 impl Rank {
     pub fn random() -> Rank {
-        let mut rng = rand::rng();
-        let index = rng.random_range(2..=10);
+        let mut rng = rand::thread_rng();
+        let index = rng.gen_range(2..=10);
         [
             Self::Ace,
             Self::King,
             Self::Queen,
             Self::Jack,
             Self::Number(index),
-        ][rng.random_range(0..=4)]
+        ][rng.gen_range(0..=4)]
     }
 
     pub fn translate(value: u8) -> Rank {
