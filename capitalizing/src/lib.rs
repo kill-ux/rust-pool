@@ -15,7 +15,7 @@ pub fn title_case(input: &str) -> String {
 pub fn change_case(input: &str) -> String {
     let mut new_str = String::new();
     for (index, c) in input.chars().enumerate() {
-        if c.is_ascii_uppercase() {
+        if c.is_uppercase() {
             new_str.push_str(&input[index..index + 1].to_lowercase());
         } else {
             new_str.push_str(&input[index..index + 1].to_uppercase());
