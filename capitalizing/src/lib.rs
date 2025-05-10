@@ -14,10 +14,11 @@ pub fn title_case(input: &str) -> String {
             new_str.push_str(&input[index..index + 1].to_uppercase());
             cap = false;
         } else {
-            if c.is_whitespace() {
-                cap = true;
-            }
             new_str.push(c);
+        }
+        
+        if c.is_whitespace() {
+            cap = true;
         }
     }
     new_str
