@@ -7,7 +7,7 @@ pub fn arrange_phrase(phrase: &str) -> String {
     }
 
     for word in phrase.split_whitespace() {
-        let mut new_str = String::new();
+        // let mut new_str = String::new();
         let mut index: usize = 0;
         for c in word.chars() {
             if c.is_numeric() {
