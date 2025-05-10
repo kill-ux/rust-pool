@@ -4,9 +4,18 @@ pub fn capitalize_first(input: &str) -> String {
 
 pub fn title_case(input: &str) -> String {
     let mut new_str = String::with_capacity(input.chars().count());
-    for word in input.split_whitespace() {
-        let w = capitalize_first(word);
-        new_str.push_str(&(w + " "));
+    let mut cap = true;
+    for (index, c) in input.chars().enumerate() {
+        if cap == true {
+            new_str.push_str(&input[index..index + 1].to_uppercase());
+            cap = false ;
+            // continue;
+        }
+        if c.is_whitespace() {
+            cap = true;
+        }
+        // let w = capitalize_first(word);
+        new_str.push(c);
     }
     new_str.pop();
     new_str
