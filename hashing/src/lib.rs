@@ -23,7 +23,7 @@ pub fn mode(list: &[i32]) -> i32 {
     for num in list {
         match new_hash.get(num) {
             Some(len) => new_hash.insert(*num, len + 1),
-            None => new_hash.insert(num, 1),
+            None => new_hash.insert(*num, 1),
         };
     }
     let mut max = *new_hash.get(&list[0]).unwrap_or(&0);
