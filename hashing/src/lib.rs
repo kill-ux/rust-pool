@@ -13,7 +13,7 @@ pub fn median(arr: &[i32]) -> i32 {
     list.sort();
     let le = list.len();
     if le % 2 == 0 {
-        return (list[le / 2] + list[le / 2 + 1]) / 2;
+        return (list[le / 2] + list[le / 2 - 1]) / 2;
     }
     list[le / 2]
 }
