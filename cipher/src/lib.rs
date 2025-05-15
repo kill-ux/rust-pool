@@ -4,8 +4,11 @@ pub struct CipherError {
 }
 
 pub fn cipher(original: &str, ciphered: &str) -> Result<(), CipherError> {
+    if original.is_empty() {
+        return Err(CipherError { expected: String::new("") });
+    }
     if ciphered.is_empty() {
-        return Err(CipherError { expected: String::from_utf8("") });
+        return Err(CipherError { expected: String::new("") });
     }
     let mut new_vec = vec![];
     for (i, &b) in original.as_bytes().iter().enumerate() {
@@ -17,6 +20,10 @@ pub fn cipher(original: &str, ciphered: &str) -> Result<(), CipherError> {
         }
         new_vec.push(num);
     }
+
+    if original.len() != ciphered.len() {
+        return Err(CipherError { expected: String::new("") });
+    } 
 
     for (i, &a) in ciphered.as_bytes().iter().enumerate() {
         if a != new_vec[i] {
