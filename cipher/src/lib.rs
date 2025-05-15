@@ -4,12 +4,10 @@ pub struct CipherError {
 }
 
 pub fn cipher(original: &str, ciphered: &str) -> Result<(), CipherError> {
-    if original.is_empty() {
+    if original.is_empty() && !ciphered.is_empty() {
         return Err(CipherError { expected: String::new() });
     }
-    if ciphered.is_empty() {
-        return Err(CipherError { expected: String::new() });
-    }
+   
     let mut new_vec = vec![];
     for (i, &b) in original.as_bytes().iter().enumerate() {
         let mut num = b;
