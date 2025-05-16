@@ -1,7 +1,6 @@
 pub mod mall;
-use std::{collections::HashMap};
-
 pub use mall::*;
+use std::collections::HashMap;
 
 pub fn biggest_store(m: &Mall) -> (String, Store) {
     let mut store = Store {
