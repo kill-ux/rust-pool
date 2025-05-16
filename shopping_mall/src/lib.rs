@@ -1,5 +1,5 @@
-mod mall;
-use std::{collections::HashMap, iter::Map};
+pub mod mall;
+use std::{collections::HashMap};
 
 pub use mall::*;
 
