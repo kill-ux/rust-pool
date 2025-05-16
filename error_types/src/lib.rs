@@ -1,4 +1,6 @@
-use chrono::prelude::*;
+use chrono::Local;
+
+pub type Utc = Local ;
 
 // this will be the structure that wil handle the errors
 #[derive(Debug, Eq, PartialEq)]
@@ -12,7 +14,7 @@ impl<'a> FormError<'a> {
     pub fn new(field_name: &'static str, field_value: String, err: &'static str) -> Self {
         Self {
             form_values: (field_name, field_value),
-            date : Local::now().format("%Y-%m-%d %H:%M:%S").to_string(),
+            date : Utc::now().format("%Y-%m-%d %H:%M:%S").to_string(),
             err : err
         }
     }
