@@ -1,4 +1,5 @@
 mod err;
+pub use err::*;
 use std::fs::File;
 use std::io::Read;
 
@@ -40,11 +41,11 @@ impl TodoList {
                         .collect(),
                 };
                 if empty {
-                    return Err(Box::new(err::ParseErr::Empty));
+                    return Err(Box::new(ParseErr::Empty));
                 }
                 Ok(todo)
             }
-            Err(err) => Err(Box::new(err::ParseErr::Malformed(Box::new(err)))),
+            Err(err) => Err(Box::new(ParseErr::Malformed(Box::new(err)))),
         }
     }
 }
