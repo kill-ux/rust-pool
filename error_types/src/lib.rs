@@ -1,6 +1,6 @@
 use chrono::Local;
 
-pub type Utc = Local ;
+pub type Utc = Local;
 
 // this will be the structure that wil handle the errors
 #[derive(Debug, Eq, PartialEq)]
@@ -14,8 +14,8 @@ impl<'a> FormError<'a> {
     pub fn new(field_name: &'static str, field_value: String, err: &'static str) -> Self {
         Self {
             form_values: (field_name, field_value),
-            date : Utc::now().format("%Y-%m-%d %H:%M:%S").to_string(),
-            err : err
+            date: Utc::now().format("%Y-%m-%d %H:%M:%S").to_string(),
+            err: err,
         }
     }
 }
@@ -26,16 +26,13 @@ pub struct Form {
     pub password: String,
 }
 
-
 trait IsSymbol {
     fn is_symbol(&self) -> bool;
 }
 
 impl IsSymbol for char {
     fn is_symbol(&self) -> bool {
-        matches!(*self,
-            '!'..='/' | ':'..='@' | '['..='`' | '{'..='~'
-        )
+        matches!(*self, '!'..='/' | ':'..='@' | '['..='`' | '{'..='~')
     }
 }
 
@@ -58,12 +55,34 @@ impl Form {
             }
         }
         if self.name.is_empty() {
-            return Err(FormError::new("name",self.name.clone(), "Username is empty"));
+            return Err(FormError::new("name", self.name.clone(), "Username is empty"));
+        }
+
+        if self.password.len() < 8 {
+            return Err(
+                FormError::new(
+                    "password",
+                    self.password.clone(),
+                    "Password should be at least 8 characters long"
+                )
+            );
         }
         if !numeric || !symbol {
-            return Err(FormError::new("password",self.password.clone(), "Password should be a combination of ASCII numbers, letters and symbols"));
+            return Err(
+                FormError::new(
+                    "password",
+                    self.password.clone(),
+                    "Password should be a combination of ASCII numbers, letters and symbols"
+                )
+            );
         }
-        Err(FormError::new("password",self.password.clone(), "Password should be at least 8 characters long"))
+
+        Err(
+            FormError::new(
+                "password",
+                self.password.clone(),
+                "Password should be at least 8 characters long"
+            )
+        )
     }
 }
-
