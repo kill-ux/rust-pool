@@ -1,6 +1,4 @@
-use chrono::Local;
-
-pub type Utc = Local;
+pub type Utc = chrono::Utc;
 
 // this will be the structure that wil handle the errors
 #[derive(Debug, Eq, PartialEq)]
@@ -55,34 +53,32 @@ impl Form {
             }
         }
         if self.name.is_empty() {
-            return Err(FormError::new("name", self.name.clone(), "Username is empty"));
+            return Err(FormError::new(
+                "name",
+                self.name.clone(),
+                "Username is empty",
+            ));
         }
 
         if self.password.len() < 8 {
-            return Err(
-                FormError::new(
-                    "password",
-                    self.password.clone(),
-                    "Password should be at least 8 characters long"
-                )
-            );
-        }
-        if !numeric || !symbol {
-            return Err(
-                FormError::new(
-                    "password",
-                    self.password.clone(),
-                    "Password should be a combination of ASCII numbers, letters and symbols"
-                )
-            );
-        }
-
-        Err(
-            FormError::new(
+            return Err(FormError::new(
                 "password",
                 self.password.clone(),
-                "Password should be at least 8 characters long"
-            )
-        )
+                "Password should be at least 8 characters long",
+            ));
+        }
+        if !numeric || !symbol {
+            return Err(FormError::new(
+                "password",
+                self.password.clone(),
+                "Password should be a combination of ASCII numbers, letters and symbols",
+            ));
+        }
+
+        Err(FormError::new(
+            "password",
+            self.password.clone(),
+            "Password should be at least 8 characters long",
+        ))
     }
 }
