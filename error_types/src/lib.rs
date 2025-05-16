@@ -64,3 +64,4 @@ impl Form {
         Err(FormError::new("password",self.password.clone(), "Password should be at least 8 characters long"))
     }
 }
+
