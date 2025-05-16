@@ -1,7 +1,6 @@
 mod err;
 pub use err::*;
-use std::fs::{self, File};
-use std::io::Read;
+use std::fs::{self};
 
 use std::error::Error;
 
