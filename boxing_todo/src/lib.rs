@@ -1,6 +1,6 @@
 mod err;
 pub use err::*;
-use std::fs::File;
+use std::fs::{self, File};
 use std::io::Read;
 
 use std::error::Error;
@@ -20,9 +20,14 @@ pub struct TodoList {
 
 impl TodoList {
     pub fn get_todo(path: &str) -> Result<TodoList, Box<dyn Error>> {
-        let mut file = File::open(path).unwrap();
-        let mut content = String::new();
-        file.read_to_string(&mut content).unwrap();
+        let content = match fs::read_to_string(path) {
+            Ok(a) => a,
+            Err(err) => {
+                return Err(Box::new(ReadErr {
+                    child_err: Box::new(err),
+                }));
+            }
+        };
         match json::parse(&content) {
             Ok(res) => {
                 let mut empty = true;
