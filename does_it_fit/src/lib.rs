@@ -11,7 +11,7 @@ pub fn area_fit(
     let area_kind = match kind {
         GeometricalShapes::Square => square_area(a) as f64,
         GeometricalShapes::Circle => circle_area(a),
-        GeometricalShapes::Rectangle => area_rec as f64,
+        GeometricalShapes::Rectangle => rectangle_area(a, b) as f64,
         GeometricalShapes::Triangle => triangle_area(a, b) as f64,
     };
     (area_kind * times as f64) <= area_rec as f64
@@ -27,7 +27,7 @@ pub fn volume_fit(
     let area_kind = match kind {
         GeometricalVolumes::Cube => cube_volume(a) as f64,
         GeometricalVolumes::Cone => cone_volume(a, b) as f64,
-        GeometricalVolumes::Parallelepiped => volume as f64,
+        GeometricalVolumes::Parallelepiped => parallelepiped_volume(a, b, c) as f64,
         GeometricalVolumes::Sphere => sphere_volume(a) as f64,
         GeometricalVolumes::TriangularPyramid => triangular_pyramid_volume(a as f64, b) as f64,
     };
