@@ -20,18 +20,18 @@ pub fn biggest_store(m: &Mall) -> (String, Store) {
     (k, store)
 }
 
-pub fn highest_paid_employee(m: &Mall) -> Vec<(String, Employee)> {
-    let mut vec: Vec<(String, Employee)> = Vec::new();
+pub fn highest_paid_employee(m: &Mall) -> Vec<(&str, Employee)> {
+    let mut vec: Vec<(&str, Employee)> = Vec::new();
     let mut salary = 0.0;
 
     for (_, f) in &m.floors {
         for (_, s) in &f.stores {
             for (key, e) in &s.employees {
                 if e.salary == salary {
-                    vec.push((key.clone(), e.clone()));
+                    vec.push((key, e.clone()));
                 } else if e.salary > salary {
                     salary = e.salary;
-                    vec = vec![(key.clone(), e.clone())]
+                    vec = vec![(key, e.clone())]
                 }
             }
         }
@@ -51,13 +51,12 @@ pub fn nbr_of_employees(m: &Mall) -> usize {
 }
 
 pub fn check_for_securities(m: &mut Mall, mut map: Vec<(String, Guard)>) {
-    let num = m
-        .floors
-        .values()
-        .map(|flr| flr.stores.values().map(|st| st.square_meters).sum::<u64>())
-        .sum::<u64>()
-        / 200;
+    let mut number = 0;
+    m.floors.values().for_each(|flr| {
+        number += flr.size_limit;
+    });
 
+    let num = number / 200;
     let l = m.guards.len() as u64;
     if l < num {
         for _ in 0..num - l {
@@ -68,15 +67,15 @@ pub fn check_for_securities(m: &mut Mall, mut map: Vec<(String, Guard)>) {
 }
 
 pub fn cut_or_raise(m: &mut Mall) {
-    let _ = m.floors.values_mut().map(|flr| {
-        flr.stores.values_mut().map(|st| {
-            st.employees.values_mut().map(|emp| {
+    m.floors.values_mut().for_each(|flr| {
+        flr.stores.values_mut().for_each(|st| {
+            st.employees.values_mut().for_each(|emp| {
                 if emp.working_hours.1 - emp.working_hours.0 >= 10 {
-                    emp.salary + (emp.salary * 0.9)
+                    emp.raise(emp.salary * 0.1);
                 } else {
-                    emp.salary - (emp.salary * 0.9)
+                    emp.cut(emp.salary * 0.1);
                 }
-            })
-        })
+            });
+        });
     });
 }
