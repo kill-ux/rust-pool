@@ -8,14 +8,11 @@ pub fn expected_variable(expected: &str, s: &str) -> Option<String> {
         let s = &s.to_lowercase();
         let expected = &expected.to_lowercase();
         let edit = Ed::edit_distance(s, expected);
-        // Some(e.to_string())
         let res = 100 - ((edit * 100) / s.len());
-        println!("{}", ( s.len()));
-        println!("=> {}", res);
         if res <= 50 {
             None
         } else {
-            Some(res.to_string())
+            Some(res.to_string() + "%")
         }
     }
 }
