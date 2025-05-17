@@ -1,0 +1,2 @@
+use mobs::*;
+fn main() {}
