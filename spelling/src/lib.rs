@@ -19,6 +19,7 @@ pub fn spell(n: u64) -> String {
     ];
 
     let res = match n {
+        0 => "zero",
         0..10 => units[n as usize],
         10..20 => teens[(n % 10) as usize],
         20..100 => &(tens[(n / 10) as usize].to_string() + "-" + &spell(n % 10)),
