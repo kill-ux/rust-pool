@@ -1,4 +1,4 @@
-fn number_logic(num: u32) -> bool {
+pub fn number_logic(num: u32) -> bool {
     let n = num.to_string();
     let le = n.len();
     let mut sum = 0;
