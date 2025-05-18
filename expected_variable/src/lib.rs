@@ -8,6 +8,7 @@ pub fn expected_variable(expected: &str, s: &str) -> Option<String> {
         None
     } else {
         let edit = Ed::edit_distance(s, expected);
+        println!("{}",edit);
         let res: i64 = 100 - ((edit as i64 * 100) / s.len() as i64);
         if res <= 50 {
             None
