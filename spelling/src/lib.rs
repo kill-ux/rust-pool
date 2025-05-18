@@ -1,4 +1,13 @@
+pub fn cases(n: u64) -> String {
+    match n {
+        0 => "".to_string(),
+        _ => spell(n),
+    }
+}
 pub fn spell(n: u64) -> String {
+    if n == 0 {
+        return "zero".to_string();
+    }
     let units = [
         "", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
     ];
@@ -19,19 +28,24 @@ pub fn spell(n: u64) -> String {
     ];
 
     let res = match n {
-        0 => "zero",
         0..10 => units[n as usize],
         10..20 => teens[(n % 10) as usize],
-        20..100 => &(tens[(n / 10) as usize].to_string() + "-" + &spell(n % 10)),
-        100..1_000 => &(units[(n / 100) as usize].to_string() + " hundred " + &spell(n % 100)),
-        1_000..10_000 => {
-            &(units[(n / 1_000) as usize].to_string() + " thousand " + &spell(n % 1_000))
+        20..100 => {
+            let x = if n % 10 != 0 {
+                &("-".to_string() + &cases(n % 10))
+            } else {
+                ""
+            };
+            &(tens[(n / 10) as usize].to_string() + x)
         }
-        10_000..1_000_000 => &(spell(n / 1_000) + " thousand " + &spell(n % 1_000)),
+        100..1_000 => &(units[(n / 100) as usize].to_string() + " hundred " + &cases(n % 100)),
+        1_000..10_000 => {
+            &(units[(n / 1_000) as usize].to_string() + " thousand " + &cases(n % 1_000))
+        }
+        10_000..1_000_000 => &(cases(n / 1_000) + " thousand " + &cases(n % 1_000)),
         1_000_000 => "one million",
         _ => "",
     };
 
-    res.to_string()
+    res.trim().to_string()
 }
-
