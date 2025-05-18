@@ -4,18 +4,14 @@ pub fn talking(text: &str) -> &str {
     }
 
     let mut is_upper = false;
-    let mut enter = false;
     for ch in text.chars() {
         if ch.is_alphabetic() && ch.is_uppercase() {
             is_upper = true;
-            enter = true ;
         } else if ch.is_alphabetic() && ch.is_lowercase() {
             is_upper = false ;
             break;
         }
     }
-    
-    println!("{is_upper}");
 
     if &text[text.len()-1..] == "?" && !is_upper  {
         return "Sure.";
