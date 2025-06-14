@@ -32,3 +32,4 @@ pub fn mode(list: &[i32]) -> i32 {
     }
     last
 }
+
