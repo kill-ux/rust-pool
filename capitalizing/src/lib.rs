@@ -21,6 +21,7 @@ pub fn title_case(input: &str) -> String {
             cap = true;
         }
     }
+    
     new_str
 }
 
