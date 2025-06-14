@@ -17,3 +17,4 @@ pub fn change_brightness(lights: &mut [Light], alias: &str, value: u8) {
         }
     }
 }
+
