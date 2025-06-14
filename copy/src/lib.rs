@@ -22,3 +22,5 @@ pub fn vec_function(b: Vec<i32>) -> (Vec<i32>, Vec<f64>) {
     }
     (b, new_vec)
 }
+
+
