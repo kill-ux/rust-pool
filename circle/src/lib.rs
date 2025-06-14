@@ -6,7 +6,10 @@ pub struct Circle {
 
 impl Circle {
     pub fn new(x: f64, y: f64, r: f64) -> Self {
-        Self { center: Point(x, y), radius: r }
+        Self {
+            center: Point(x, y),
+            radius: r,
+        }
     }
 
     pub fn diameter(self) -> f64 {
@@ -18,9 +21,9 @@ impl Circle {
     }
 
     pub fn intersect(self, circle2: Circle) -> bool {
-        let rigth = self.radius + circle2.radius;
+        let rigth: f64 = self.radius + circle2.radius;
         let d = self.center.distance(circle2.center);
-        if rigth >= d  {
+        if rigth >= d {
             return true;
         }
         false
