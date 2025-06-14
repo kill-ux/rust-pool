@@ -8,13 +8,14 @@ pub fn tic_tac_toe(table: [[char; 3]; 3]) -> String {
         p2 = true
     }
     if !p1 && !p2 {
-        String::from("tie")
+        "tie".to_string()
     } else if p1 {
-        String::from("player X won")
+        "player X won".to_string()
     } else {
-        String::from("player O won")
+        "player O won".to_string()
     }
 }
+
 
 pub fn diagonals(player: char, tabl: [[char; 3]; 3]) -> bool {
     let mut table = tabl.clone();
@@ -34,6 +35,7 @@ pub fn diagonals(player: char, tabl: [[char; 3]; 3]) -> bool {
     }
     false
 }
+
 
 pub fn horizontal(player: char, table: [[char; 3]; 3]) -> bool {
     for tab in table {
@@ -64,3 +66,4 @@ pub fn vertical(player: char, table: [[char; 3]; 3]) -> bool {
     }
     false
 }
+
