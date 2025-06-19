@@ -24,15 +24,6 @@ pub struct Form {
     pub password: String,
 }
 
-trait IsSymbol {
-    fn is_symbol(&self) -> bool;
-}
-
-impl IsSymbol for char {
-    fn is_symbol(&self) -> bool {
-        matches!(*self, '!'..='/' | ':'..='@' | '['..='`' | '{'..='~')
-    }
-}
 
 impl Form {
     pub fn validate(&self) -> Result<(), FormError> {
@@ -44,7 +35,7 @@ impl Form {
                 alpha = true;
             } else if ch.is_numeric() {
                 numeric = true;
-            } else if ch.is_symbol() {
+            } else {
                 symbol = true;
             }
 
