@@ -33,7 +33,7 @@
 
 #[derive(Debug, PartialEq)]
 pub struct CipherError {
-    pub res: String,
+    pub expected: String,
 }
 
 pub fn cipher(original: &str, ciphered: &str) -> Result<(), CipherError> {
@@ -51,6 +51,6 @@ pub fn cipher(original: &str, ciphered: &str) -> Result<(), CipherError> {
     if res == ciphered {
         Ok(())
     } else {
-        Err(CipherError { res })
+        Err(CipherError { expected: res })
     }
 }
