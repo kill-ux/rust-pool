@@ -1,8 +1,6 @@
-use std::fs::OpenOptions;
-use std::path::Path;
-use std::io::Write;
+use std::{fs::OpenOptions, io::Write, path::Path};
 
 pub fn open_or_create<P: AsRef<Path>>(path: &P, content: &str) {
-    let file = OpenOptions::new().create(true).write(true).append(true).open(path);
-    let _ = file.unwrap().write(content.as_bytes());
+    let mut file  = OpenOptions::new().create(true).append(true).write(true).open(path).unwrap();
+    file.write(content.as_bytes()).unwrap();
 }
