@@ -13,7 +13,7 @@ pub fn rotate(input: &str, mut key: i8) -> String {
                 num = (ch as u8 - b'a' + key as u8) % 26 + b'a';
             }
         }
-        res.push_str(&num.to_string());
+        res.push(num as char);
     }
     res
 }
