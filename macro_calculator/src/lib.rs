@@ -1,4 +1,4 @@
-pub use json::*;
+use json::object;
 
 pub struct Food {
     pub name: String,
@@ -10,23 +10,21 @@ pub struct Food {
 }
 
 pub fn calculate_macros(foods: &[Food]) -> json::JsonValue {
-    let mut cals: f64 = 0.0;
-    let mut carbs: f64 = 0.0;
-    let mut proteins: f64 = 0.0;
-    let mut fats: f64 = 0.0;
-    for food in foods {
-        cals += food.calories.1[..food.calories.1.len() - 4]
-            .parse::<f64>()
-            .unwrap()
-            * food.nbr_of_portions;
-        carbs += food.carbs * food.nbr_of_portions;
-        proteins += food.proteins * food.nbr_of_portions;
-        fats += food.fats * food.nbr_of_portions;
-    }
+    let mut cals = 0.;
+    let mut carbs = 0.;
+    let mut proteins = 0.;
+    let mut fats = 0.;
+    foods.iter().for_each(|food| {
+        cals = food.calories.1.parse::<f64>().unwrap() * food.nbr_of_portions;
+        carbs = food.carbs * food.nbr_of_portions;
+        proteins = food.proteins * food.nbr_of_portions;
+        fats = food.fats * food.nbr_of_portions;
+    });
+
     object! {
-        cals : format!("{:.2}",cals).parse::<f64>().unwrap(),
-        carbs :  format!("{:.2}",carbs).parse::<f64>().unwrap(),
-        proteins :  format!("{:.2}",proteins).parse::<f64>().unwrap(),
-        fats :  format!("{:.2}",fats).parse::<f64>().unwrap(),
+        cals : format!("{cals}").parse::<f64>().unwrap() ,
+        carbs: format!("{carbs}").parse::<f64>().unwrap(),
+        proteins: format!("{proteins}").parse::<f64>().unwrap() ,
+        fats: format!("{fats}").parse::<f64>().unwrap()
     }
 }
