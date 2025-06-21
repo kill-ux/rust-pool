@@ -1,29 +1,27 @@
 pub fn talking(text: &str) -> &str {
     if text.trim().is_empty() {
-        return "Just say something!" ;
+        return "Just say something!";
     }
-
     let mut is_upper = false;
-    for ch in text.chars() {
-        if ch.is_alphabetic() && ch.is_uppercase() {
+    for ele in text.chars() {
+        if ele.is_uppercase() && ele.is_alphabetic() {
             is_upper = true;
-        } else if ch.is_alphabetic() && ch.is_lowercase() {
-            is_upper = false ;
+        } else if ele.is_alphabetic() {
+            is_upper = false;
             break;
         }
     }
 
-    if &text[text.len()-1..] == "?" && !is_upper  {
-        return "Sure.";
-    }
-    
-    if &text[text.len()-1..] == "?" && is_upper {
+    if is_upper && text.chars().last().unwrap() == '?' {
         return "Quiet, I am thinking!";
     }
-    
-    if is_upper {
-        return "There is no need to yell, calm down!" ;
+
+    if !is_upper && text.chars().last().unwrap() == '?' {
+        return "Sure.";
     }
-    
+
+    if is_upper {
+        return "There is no need to yell, calm down!";
+    }
     "Interesting"
 }
