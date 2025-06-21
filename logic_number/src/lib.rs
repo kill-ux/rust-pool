@@ -1,10 +1,10 @@
 pub fn number_logic(num: u32) -> bool {
-    let n = num.to_string();
-    let le = n.len();
-    let mut sum = 0;
-    for nb in n.chars() {
-       sum += nb.to_string().parse::<u32>().unwrap().pow(le as u32);
+    let str = num.to_string();
+    let power = str.len() as u32;
+    let mut sum: u32 = 0;
+    for ch in str.chars() {
+        let n = ch as u32 - b'0' as u32;
+        sum += n.pow(power);
     }
-    println!("{sum}");
-    sum == num 
+    num == sum
 }
