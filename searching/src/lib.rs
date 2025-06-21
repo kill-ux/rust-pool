@@ -1,9 +1,7 @@
-
-
 pub fn search(array: &[i32], key: i32) -> Option<usize> {
-    for (a,value) in array.iter().enumerate() {
-        if key == *value {
-            return Some(a);
+    for (i, ele) in array.iter().enumerate() {
+        if *ele == key {
+            return Some(i);
         }
     }
     None
