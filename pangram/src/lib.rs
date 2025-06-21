@@ -1,10 +1,9 @@
+use std::collections::HashMap;
+
 pub fn is_pangram(s: &str) -> bool {
-    let s = s.to_uppercase();
-    let vec: Vec<char> = ('A'..='Z').into_iter().collect();
-    for ch in vec {
-        if !s.contains(ch) {
-            return false;
-        }
+    let mut map: HashMap<char, bool> = HashMap::new();
+    for ele in s.chars() {
+        map.insert(ele, true);
     }
-    true
+    map.len() == 26
 }
