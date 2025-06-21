@@ -1,13 +1,15 @@
 pub fn num_to_ordinal(x: u32) -> String {
-    if x == 11 || x == 12 || x == 13 {
-        return x.to_string() + "th";
+    match x {
+        11 | 12 | 13 => x.to_string() + "th",
+        _ => {
+            let a = x.to_string();
+            let l = a.len();
+            match &a[l - 1..] {
+                "1" => a + "st",
+                "2" => a + "nd",
+                "3" => a + "rd",
+                _ => a + "th",
+            }
+        }
     }
-    let num = x % 10;
-    let a = match num {
-        1 => x.to_string() + "st",
-        2 => x.to_string() + "nd",
-        3 => x.to_string() + "rd",
-        _ => x.to_string() + "th",
-    };
-    a
 }
