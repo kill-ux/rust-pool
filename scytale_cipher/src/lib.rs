@@ -1,23 +1,21 @@
-pub fn scytale_cipher(message: String, i: u32) -> String {
-    let mut new_str = String::new();
-    let mut vec: Vec<String> = vec![];
-
-    for j in 0..(message.len() as f32 / i as f32).ceil() as usize {
-        let index = j * i as usize;
-        if message.len() < index + i as usize {
-            let mut s = String::from(&message[index..]);
-            s.push_str(&" ".repeat((index + i as usize) - message.len()));
-            vec.push(s);
-        } else {
-            vec.push(message[index..index + i as usize].to_string());
+pub fn scytale_cipher(chars: String, i: u32) -> String {
+    if i == 0 {
+        return String::new();
+    }
+    let chars: Vec<char> = chars.chars().collect();
+    let le = chars.len();
+    let i_usize = i as usize;
+    let len = (le + i_usize - 1) / i_usize;
+    let mut str = String::with_capacity(le);
+    for index in 0..i {
+        let mut inc = index as usize;
+        for _ in 0..len {
+            match chars.get(inc) {
+                Some(ch) => str.push(*ch),
+                None => str.push(' '),
+            }
+            inc += i_usize;
         }
     }
-
-    for index_j in 0..i as usize {
-        for index_i in 0..vec.len() {
-            let ch = &vec[index_i][index_j..index_j + 1];
-            new_str.push(ch.to_string().chars().nth(0).unwrap());
-        }
-    }
-    new_str.trim().to_string()
+    str.trim().to_string()
 }
