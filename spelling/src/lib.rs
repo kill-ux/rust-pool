@@ -39,13 +39,11 @@ pub fn spell(n: u64) -> String {
             &(tens[(n / 10) as usize].to_string() + x)
         }
         100..1_000 => &(units[(n / 100) as usize].to_string() + " hundred " + &cases(n % 100)),
-        1_000..10_000 => {
-            &(units[(n / 1_000) as usize].to_string() + " thousand " + &cases(n % 1_000))
-        }
-        10_000..1_000_000 => &(cases(n / 1_000) + " thousand " + &cases(n % 1_000)),
+        1_000..1_000_000 => &(cases(n / 1_000) + " thousand " + &cases(n % 1_000)),
         1_000_000 => "one million",
         _ => "",
     };
 
     res.trim().to_string()
 }
+
