@@ -30,18 +30,10 @@ impl Workers {
         }
     }
     pub fn add_drop(&self, id: usize) {
-        let dropped = match self.states.borrow().get(id) {
-            Some(b) => (true, *b),
-            None => (false, false),
-        };
-        match dropped {
-            (_, true) => panic!("{}", &format!("{id} is already dropped")),
-            (true, false) => {
+        match self.is_dropped(id) {
+            true => panic!("{id} is already dropped"),
+            false => {
                 self.states.borrow_mut()[id] = true;
-                self.drops.set(self.drops.get() + 1);
-            }
-            (false, false) => {
-                self.states.borrow_mut().push(true);
                 self.drops.set(self.drops.get() + 1);
             }
         }
