@@ -114,42 +114,7 @@ impl BloodType {
     }
 
     pub fn donors(&self) -> Vec<Self> {
-        let mut vec = vec!["O-".parse::<BloodType>().unwrap()];
-        match self.rh_factor {
-            RhFactor::Positive => {
-                vec.push("O+".parse().unwrap());
-                if self.antigen != Antigen::O {
-                    vec.extend([
-                        self.clone(),
-                        BloodType {
-                            antigen: self.antigen.clone(),
-                            rh_factor: RhFactor::Negative,
-                        },
-                    ]);
-                }
-                if self.antigen == Antigen::AB {
-                    vec.extend([
-                        "A+".parse().unwrap(),
-                        "A-".parse().unwrap(),
-                        "B+".parse().unwrap(),
-                        "B-".parse().unwrap(),
-                    ]);
-                }
-            }
-            RhFactor::Negative => {
-                if self.antigen != Antigen::O {
-                    vec.push(self.clone());
-                }
-                if self.antigen == Antigen::AB {
-                    vec.extend(["A-".parse().unwrap(), "B-".parse().unwrap()]);
-                }
-            }
-        }
-        vec
-    }
-
-    pub fn recipients(&self) -> Vec<BloodType> {
-        let mut vec = vec!["AB+".parse::<BloodType>().unwrap()];
+         let mut vec = vec![];
         let tab = [
             "AB-".parse::<BloodType>().unwrap(),
             "A-".parse().unwrap(),
@@ -162,6 +127,26 @@ impl BloodType {
         ];
           for ele in tab {
             if self.can_receive_from(&ele) {
+                vec.push(ele);
+            }
+        }
+        vec
+    }
+
+    pub fn recipients(&self) -> Vec<BloodType> {
+        let mut vec = vec![];
+        let tab = [
+            "AB-".parse::<BloodType>().unwrap(),
+            "A-".parse().unwrap(),
+            "B-".parse().unwrap(),
+            "O-".parse().unwrap(),
+            "AB+".parse().unwrap(),
+            "A+".parse().unwrap(),
+            "B+".parse().unwrap(),
+            "O+".parse().unwrap(),
+        ];
+          for ele in tab {
+            if ele.can_receive_from(self) {
                 vec.push(ele);
             }
         }
