@@ -6,13 +6,17 @@ pub struct Vector<T: Scalar>(pub Vec<T>);
 use std::ops::{Add, Mul};
 
 impl<T: Scalar + Add<Output = T> + Copy> Add for Vector<T> {
-    type Output = Vector<T>;
+    type Output = Option<Vector<T>>;
     fn add(self, rhs: Self) -> Self::Output {
-        let mut vec = Vector(Vec::new());
-        for (index, _) in self.0.iter().enumerate() {
-            vec.0.push(self.0[index] + rhs.0[index]);
+        if self.0.len() != rhs.0.len() {
+            None
+        } else {
+            let mut vec = Vector(Vec::new());
+            for (index, _) in self.0.iter().enumerate() {
+                vec.0.push(self.0[index] + rhs.0[index]);
+            }
+            Some(vec)
         }
-        vec
     }
 }
 
