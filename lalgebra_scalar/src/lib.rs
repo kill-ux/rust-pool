@@ -15,7 +15,7 @@ impl Scalar for i32 {
 }
 
 impl Scalar for u32 {
-    type Item = i32;
+    type Item = u32;
     fn one() -> Self::Item {
         1
     }
@@ -25,7 +25,7 @@ impl Scalar for u32 {
 }
 
 impl Scalar for u64 {
-    type Item = i32;
+    type Item = u64;
     fn one() -> Self::Item {
         1
     }
