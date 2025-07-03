@@ -73,8 +73,6 @@ impl<T: Scalar<Item = T> + Copy + Mul<Output = T> + Add<Output = T> + Debug> Mul
                     }
 					vec3.push(a);
                 }
-                println!("vec3 => {:?}", vec3);
-
                 matrix.push(vec3);
             }
             Some(Matrix(matrix))
