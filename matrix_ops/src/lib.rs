@@ -9,7 +9,7 @@ impl<T: Scalar<Item = T> + Add<Output = T> + Copy> Add for Matrix<T> {
     type Output = Option<Matrix<T>>;
     fn add(self, rhs: Self) -> Self::Output {
         let mut matrix = Vec::new();
-        if self.0.len() != self.0.len() {
+        if self.0.len() == self.0.len() {
             for index in 0..self.0.len() {
                 if self.0[index].len() != rhs.0[index].len() {
                     return None;
@@ -31,7 +31,7 @@ impl<T: Scalar<Item = T> + Sub<Output = T> + Copy> Sub for Matrix<T> {
     type Output = Option<Matrix<T>>;
     fn sub(self, rhs: Self) -> Self::Output {
         let mut matrix = Vec::new();
-        if self.0.len() != self.0.len() {
+        if self.0.len() == self.0.len() {
             for index in 0..self.0.len() {
                 if self.0[index].len() != rhs.0[index].len() {
                     return None;
