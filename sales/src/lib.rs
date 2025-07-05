@@ -10,14 +10,14 @@ impl Store {
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Cart {
-    pub prices: Vec<f32>,
+    pub receipt: Vec<f32>,
 }
 impl Cart {
     pub fn new() -> Cart {
-        Self { prices: vec![] }
+        Self { receipt: vec![] }
     }
     pub fn insert_item(&mut self, s: &Store, ele: String) {
-        self.prices.push(
+        self.receipt.push(
             s.products
                 .iter()
                 .find(|(name, _)| name == &ele)
@@ -26,23 +26,23 @@ impl Cart {
         );
     }
     pub fn generate_receipt(&mut self) -> Vec<f32> {
-        self.prices.sort_by(|a,b| a.partial_cmp(b).unwrap());
-        let num = self.prices.len() / 3 ;
+        self.receipt.sort_by(|a,b| a.partial_cmp(b).unwrap());
+        let num = self.receipt.len() / 3 ;
         let mut pers = 0.;
-        let sums = self.prices.iter().sum::<f32>();
+        let sums = self.receipt.iter().sum::<f32>();
         let mut copy_pers = vec![];
         for i in 0..num {
-            pers += self.prices[i] ;
+            pers += self.receipt[i] ;
         }
 
-        for ele in &self.prices {
+        for ele in &self.receipt {
             copy_pers.push((ele*100.)/sums);
         }
 
         let sums = sums - pers ;
         for (i,ele) in copy_pers.iter().enumerate() {
-            self.prices[i] = format!("{:.2}",(ele * sums) / 100.).parse::<f32>().unwrap();
+            self.receipt[i] = format!("{:.2}",(ele * sums) / 100.).parse::<f32>().unwrap();
         }
-        self.prices.clone()
+        self.receipt.clone()
     }
 }
