@@ -1,4 +1,4 @@
-use get_highest::Numbers;
+use highest::*;
 
 fn main() {
     let expected = [30, 500, 20, 70];
