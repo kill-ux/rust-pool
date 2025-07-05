@@ -39,7 +39,7 @@ impl Cart {
             copy_pers.push((ele*100.)/sums);
         }
 
-        let sums = sums - pers ;
+        let sums: f32 = sums - pers ;
         for (i,ele) in copy_pers.iter().enumerate() {
             self.receipt[i] = format!("{:.2}",(ele * sums) / 100.).parse::<f32>().unwrap();
         }
