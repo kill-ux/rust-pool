@@ -1,3 +1,5 @@
+
+// arrange phrase so sort tge words by its number
 pub fn arrange_phrase(phrase: &str) -> String {
     let mut new_str1: Vec<String> = Vec::new();
     for _ in phrase.split_whitespace() {
